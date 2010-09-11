@@ -1,0 +1,15 @@
+
+embromador.pb
+
+Essa é uma versão do Postmodernism generator (http://www.elsewhere.org/pomo/) para Português Brasileiro. Boa parte da gramática recursiva foi passada para o português e acrescentei um bocado de coisas para ter suporte a gênero de substantivos, artigos, etc. Acrescentar novas estruturas de frases seria o próximo passo.
+
+Para usá-lo é preciso a Dada engine, no link abaixo.
+
+http://dev.null.org/dadaengine/
+
+
+----
+
+embromador.py
+
+Essa é uma implementação que comecei a fazer em Python depois que as limitações da Dada engine para gerar texto em português começaram a atrapalhar muito, e como um experimento de reflexão computacional. Ainda há muita coisa para fazer e o código não é dos mais fáceis de entender, mas é interessante.

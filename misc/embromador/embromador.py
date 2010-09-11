@@ -1,5 +1,5 @@
-#!/usr/local/bin/python2.6
-# -*- coding: ISO8859-1 -*-
+#!/usr/bin/env python2.6
+# -*- coding: utf-8 -*-
 
 import random
 import re
@@ -10,13 +10,13 @@ import copy
 VOGAIS = 'aeiou'
 CONSOANTES = 'bcdfghjklmnpqrstvwxyz'
 
-# Gênero
+# GÃªnero
 FEMININO = F = "f" # feminino
 MASCULINO = M = "m" # masculino
 NEUTRO = N = "n" # neutro
 IGENERO = {'n':0, 'm':1, 'f':2}
 
-# Número
+# NÃºmero
 SINGULAR = S = "s" # singular
 PLURAL = P ="p" # plural
 # Grau
@@ -26,24 +26,24 @@ INDEFINIDO = I = "i" # indefinido
 # 0: pronome 'nenhum', substantivo no singular
 # 1: artigo no singular, substantivo no singular
 # 2: artigo no plural, substantivo no singular
-# 3: plural, "vários"/"alguns"
+# 3: plural, "vÃ¡rios"/"alguns"
 # 4: plural, "muitos"
 
 # artigos e pronomes
-ARTIGOS = {M+D:["nenhum", "o", "os", "vários", "muitos"],
+ARTIGOS = {M+D:["nenhum", "o", "os", "vÃ¡rios", "muitos"],
            M+I:["nenhum", "um", "uns", "alguns", "muitos"],
-           F+D:["nenhuma", "a", "as", "várias", "muitas"],
+           F+D:["nenhuma", "a", "as", "vÃ¡rias", "muitas"],
            F+I:["nenhuma", "uma", "umas", "algumas", "muitas"],
            }
 
-### flexão de plural para adjetivo e substantivo
+### flexÃ£o de plural para adjetivo e substantivo
 # FIXME: melhorar isso
 def plural_substantivo_adjetivo(palavra):
-    # terminação em r, s, z, acrescenta 'es'
+    # terminaÃ§Ã£o em r, s, z, acrescenta 'es'
     if re.match('.*[rsz]$', palavra):
         return palavra+'es'
 
-    # terminação em x, faz nada
+    # terminaÃ§Ã£o em x, faz nada
     if re.match('.*x$', palavra):
         return palavra
     
@@ -51,7 +51,7 @@ def plural_substantivo_adjetivo(palavra):
 
 
 def genero_adjetivo(palavra, genero):
-    # se masculino, provavelmente não precisará fazer nada
+    # se masculino, provavelmente nÃ£o precisarÃ¡ fazer nada
     if genero == M:
         if re.match('.*a$', palavra):
             palavra = re.sub('a$', 'o', palavra)
@@ -83,7 +83,7 @@ class MetaPalavra(type):
 class MetaPalavraAleatoria(MetaPalavra):
     
     def escolhe_subclasse(cls):
-        # caso não tenha classes base, escolha uma entre as subclasses
+        # caso nÃ£o tenha classes base, escolha uma entre as subclasses
         # dela, recursivamente
         cls = random.choice(cls.__subcls__)
         if not hasattr(cls, '_base'):
@@ -94,8 +94,8 @@ class MetaPalavraAleatoria(MetaPalavra):
         cls = cls.escolhe_subclasse()
         
         if not kwds:
-            # garante que o mesmo termo nunca será repetido em seguida
-            # quando há mais de uma opção
+            # garante que o mesmo termo nunca serÃ¡ repetido em seguida
+            # quando hÃ¡ mais de uma opÃ§Ã£o
             if len(cls._base) > 1:
                 if not cls._log:
                     x = random.choice(cls._base)
@@ -120,7 +120,7 @@ class MetaPalavraAleatoria(MetaPalavra):
 
 
 
-### classe genérica para palavra
+### classe genÃ©rica para palavra
 class Palavra(object):
     __metaclass__ = MetaPalavra
     def __init__(self, palavra=None, outra=None):
@@ -154,7 +154,7 @@ class Substantivo(PalavraAleatoria):
         return ' '.join(todas)
 
     def __add__(self, outra):
-        # 'outra' aqui é provavelmente adjetivo
+        # 'outra' aqui Ã© provavelmente adjetivo
         outra = copy.copy(outra)
         raiz = atual = copy.deepcopy(self)
         while atual.outra is not None:
@@ -178,8 +178,8 @@ class Substantivo(PalavraAleatoria):
         elif self.numero > 1:
             return plural_substantivo_adjetivo(self.palavra)
 
-
-### classe base para artigos, artigos não são aleatórios, tem a
+q
+### classe base para artigos, artigos nÃ£o sÃ£o aleatÃ³rios, tem a
 ### proxima palavra atribuida com a operacao, e comportamento somente
 ### na impressao
 class Artigo(Palavra):
@@ -206,13 +206,13 @@ class ArtigoIndefinido(Artigo):
         return ' '.join(todas)
 
     
-### Classe base para adjetivos, têm seus atributos definidos pelo
+### Classe base para adjetivos, tÃªm seus atributos definidos pelo
 ### substantivo ao fazer a operacao
 class Adjetivo(PalavraAleatoria):
     _keys=('palavra',)
     def __init__(self, palavra=None, genero=None, numero=1, outra=None):
         # 'palavra' em adjetivos pode ser um dicionario com as
-        # variações
+        # variaÃ§Ãµes
         super(Adjetivo, self).__init__(palavra=palavra, outra=outra)
         self.genero = genero
         self.numero = numero
@@ -227,7 +227,7 @@ class Adjetivo(PalavraAleatoria):
         return '-'.join(todas)
 
     def __add__(self, outra):
-        # caminha recursivamente até encontrar um adjetivo sem outro
+        # caminha recursivamente atÃ© encontrar um adjetivo sem outro
         raiz = atual = copy.deepcopy(self)
         outra = copy.copy(outra)
         while atual.outra is not None:
@@ -244,12 +244,12 @@ class Adjetivo(PalavraAleatoria):
             return self.palavra['n']
         except KeyError:
             pass
-        # então tenta com o gênero devido
+        # entÃ£o tenta com o gÃªnero devido
         try:
             return self.palavra[self.genero]
         except KeyError:
             pass
-        # e então faz a conversão com o primeiro que encontrar
+        # e entÃ£o faz a conversÃ£o com o primeiro que encontrar
         return genero_adjetivo(self.palavra.values()[0], self.genero)
 
     def flexao_numero(self, palavra):
@@ -269,7 +269,7 @@ class AdjetivoNegativo(Adjetivo):
 class AdjetivoPolitico(Adjetivo):
     pass
 
-# Adjetivos negativos políticos
+# Adjetivos negativos polÃ­ticos
 class AdjetivoNegativoPolitico(AdjetivoNegativo, AdjetivoPolitico):
     
     _base = [{'n':"sexista"},
@@ -285,7 +285,7 @@ class SubstantivoConcreto(Substantivo):
     _base = [('porta', F),
              ('fruta', F),
              ('chave', F),
-             ('céu', M),
+             ('cÃ©u', M),
              ('mar', M),
              ('casa', F),
              ('muro', M),
@@ -298,7 +298,7 @@ class SubstantivoAbstrato(Substantivo):
     _base = [('teoria', F),
              ('discurso', M),
              ('narrativa', F),
-             ('idéia', F),
+             ('idÃ©ia', F),
              ]
 
 

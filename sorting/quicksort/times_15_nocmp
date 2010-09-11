@@ -1,0 +1,27 @@
+
+quicksort, range(65536): 3015.90 usec
+    qsort, range(65536): 11814.10 usec
+-8799
+
+quicksort, rrange(65536): 3157.70 usec
+    qsort, rrange(65536): 16725.30 usec
+-13568
+
+quicksort, randbin(65536): 5406.00 usec
+    qsort, randbin(65536): 16013.60 usec
+-10607
+
+quicksort, sample(65536): 9521.70 usec
+    qsort, sample(65536): 25841.40 usec
+-16320
+
+quicksort, fullrand(65536): 11252.10 usec
+    qsort, fullrand(65536): 27685.40 usec
+-16433
+
+quicksort, killer(65536): 4646.20 usec
+    qsort, killer(65536): 16235.70 usec
+-11589
+
+avg: -12886
+

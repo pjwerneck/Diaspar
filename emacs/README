@@ -1,0 +1,8 @@
+
+These are my configuration files for Python code editing in emacs.
+
+I'm not a power user, but I do enjoy it much more than other editors.
+
+It's based on Ryan's setup and it depends on a few packages, so I recommend reading his post anyway.
+
+http://www.enigmacurry.com/2009/01/21/autocompleteel-python-code-completion-in-emacs/

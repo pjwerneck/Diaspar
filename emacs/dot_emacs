@@ -1,0 +1,31 @@
+(custom-set-variables
+ (setq use-dialog-box nil)
+
+ '(inhibit-startup-screen t))
+
+(custom-set-faces
+ )
+
+
+(add-to-list 'load-path "~/.emacs.d")
+(add-to-list 'load-path "~/.emacs.d/vendor")
+(progn (cd "~/.emacs.d/vendor")
+       (normal-top-level-add-subdirs-to-load-path))
+
+
+(require 'python)
+(require 'python-mode)
+(require 'auto-complete)
+(require 'auto-complete-config)
+
+(global-auto-complete-mode t)
+(add-to-list 'ac-dictionary-directories "~/.emacs.d/ac-dict")
+(ac-config-default)
+
+(require 'yasnippet)
+(yas/initialize)
+(yas/load-directory "~/.emacs.d/snippets")
+
+
+
+(load-library "init_python")

@@ -511,7 +511,7 @@ class TestCompiledCode(BaseTest):
         """
         code = self.get_string(self.test_let_closures)
         namespace = {}
-        #self.run_code(code, namespace)
+        self.run_code(code, namespace)
 
     def test_let_with_wrapper(self):
         """Test let statement with namespace wrapper

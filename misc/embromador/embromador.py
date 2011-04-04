@@ -178,7 +178,7 @@ class Substantivo(PalavraAleatoria):
         elif self.numero > 1:
             return plural_substantivo_adjetivo(self.palavra)
 
-q
+
 ### classe base para artigos, artigos não são aleatórios, tem a
 ### proxima palavra atribuida com a operacao, e comportamento somente
 ### na impressao

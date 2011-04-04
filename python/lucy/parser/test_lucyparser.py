@@ -545,6 +545,16 @@ class TestParserRules(BaseTest):
         code = self.get_string(self.test_atoms_with_no_comma_fail)
         self.assertRaises(SyntaxError, self.parser.parse, code)
 
+    def test_assignment_to_literal_fails(self):
+        """Test if an assignment to literal fails
+
+        1 = 0
+        
+        """
+        code = self.get_string(self.test_assignment_to_literal_fails)
+        print self.parser._lexer
+        #self.assertRaises(SyntaxError, self.parser.parse, code)
+
 
 
 

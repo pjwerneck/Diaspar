@@ -65,25 +65,15 @@ def mr(n):
 
 
 
-def check(n):
-    t = int(math.sqrt(n))
+def check():
+    primes = []
 
-    divs = []
+    for x in range(1000000):
+        if mr(x):
+            primes.append(x)
+
+    print primes
     
-    while t > 0:
-        d, m = divmod(n, t)
-        if m:
-            t -= 1
-            continue
-        
-        if mr(t):
-            print t
-
-        t -= 1
 
 
-
-T = 600851475143
-
-
-check(T)
+check()

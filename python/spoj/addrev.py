@@ -1,12 +1,18 @@
 
+
 from sys import stdin
 
+d = stdin.read()[::-1].split()
+d = map(int, d)
+d = map(int.__add__, d[0:-1:2], d[1::2])
 
-d = [s.split() for s in stdin.readlines()[1:]]
+d = [repr(s).rstrip('0') for s in d]
 
-d = map(int, stdin.read(-1)[::-1].split())
+d = '\n'.join(d)[::-1]
 
-d = map(lambda s: str(s).rstrip('0'), map(sum, zip(d[0::2], d[1::2])))
+print d
 
-s = '\n'.join(d)[::-1]
-print s
+
+
+
+

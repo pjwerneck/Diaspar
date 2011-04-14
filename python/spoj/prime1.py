@@ -1,7 +1,4 @@
 
-import math
-
-
 from sys import stdin
 from random import randint
 
@@ -65,25 +62,20 @@ def mr(n):
 
 
 
-def check(n):
-    t = int(math.sqrt(n))
+def main():
+    f = stdin
+    f = open('test_prime1')
 
-    divs = []
-    
-    while t > 0:
-        d, m = divmod(n, t)
-        if m:
-            t -= 1
+    f.readline()
+
+    for line in f.readlines():
+        if not line.strip():
             continue
-        
-        if mr(t):
-            print t
-
-        t -= 1
-
-
-
-T = 600851475143
+        a, b = line.split()
+        for n in xrange(int(a), int(b)+1):
+            if mr(n):
+                print n
+        print
 
 
-check(T)
+main()

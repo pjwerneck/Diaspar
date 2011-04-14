@@ -5,7 +5,7 @@ import math
 from sys import stdin
 from random import randint
 
-
+import itertools
 
 CACHE_BIN = {}
 
@@ -65,25 +65,26 @@ def mr(n):
 
 
 
-def check(n):
-    t = int(math.sqrt(n))
+def check():
+    primes = []
 
-    divs = []
-    
-    while t > 0:
-        d, m = divmod(n, t)
-        if m:
-            t -= 1
+    for x in range(1000, 10000):
+        if mr(x):
+            primes.append(x)
+
+    for group in itertools.combinations(primes, 3):
+        a, b, c = group
+
+        if not (set(str(a)) == set(str(b)) == set(str(c))):
             continue
+
+        ns = [a, b, c]
+        ns.sort()
+
+        if ns[2] - ns[1] == ns[1] - ns[0]:
+            print ns
+
         
-        if mr(t):
-            print t
+    
 
-        t -= 1
-
-
-
-T = 600851475143
-
-
-check(T)
+check()
